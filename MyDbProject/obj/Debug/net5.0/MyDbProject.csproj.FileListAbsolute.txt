@@ -1,0 +1,15 @@
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\MyDbProject.deps.json
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\MyDbProject.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\ref\MyDbProject.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\MyDbProject.pdb
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\My_Tables.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\bin\Debug\net5.0\My_Tables.pdb
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.csproj.CopyComplete
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\ref\MyDbProject.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\MyDbProject\obj\Debug\net5.0\MyDbProject.pdb

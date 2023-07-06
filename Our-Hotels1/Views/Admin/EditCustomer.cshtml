@@ -1,0 +1,55 @@
+﻿@model OurHotels.Dto.Customer.UpdateCustomerDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    Layout = "_AdminLayout";
+}
+<h2>Edit Customer</h2>
+
+<form method="post" asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @Html.HiddenFor(m => m.CustomerEntityId)
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="phoneNumber"></label>
+        <input asp-for="phoneNumber" class="form-control" />
+        <span asp-validation-for="phoneNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="gender"></label>
+        <input asp-for="gender" class="form-control" />
+        <span asp-validation-for="gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Identity_Certificate"></label>
+        <input asp-for="Identity_Certificate" class="form-control" />
+        <span asp-validation-for="Identity_Certificate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Birthday"></label>
+        <input asp-for="Birthday" class="form-control" />
+        <span asp-validation-for="Birthday" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

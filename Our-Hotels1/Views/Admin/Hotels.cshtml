@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+<style>
+    .inactive-link {
+        pointer-events: none; /* Disable click events */
+        cursor: default; /* Set cursor to default */
+    }
+
+    .inactive-link:hover {
+        text-decoration: none; /* Remove underline on hover */
+    }
+</style>
+
+@model List<OurHotels.Dto.Hotel.HotelDto>
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                @*<h3 class="page-title">Welcome Admin!</h3>*@
+                <button type="button" id="printButton" class="btn btn-secondary btn-lg">Generate a PDF</button>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">Hotels</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    <!-- Recent Orders -->
+    <div class="card card-table flex-fill">
+        <div class="card-header">
+            <h4 class="card-title">Hotels List</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsifve">
+                <table id="yourTableId"class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr>
+                            
+                            <th>Hotel Name</th>
+                            <th>Manager Name</th>
+                            <th>Hotel Address</th>
+                            <th>Hotel's City</th>
+                            <th>Hotel's State</th>
+                            <th>Phone1</th>
+                            <th>Phone2</th>
+                            <th>Maneger Phone</th>
+                           
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                   
+                    <td>
+					<h2 class="table-avatar">
+	             	<a class="avatar avatar-sm mr-2 inactive-link">
+				<img class="avatar-img rounded-circle"src="data:image;base64,@Convert.ToBase64String(item.HotelPicture)" alt="User Image">
+	                          </a>
+				<a class="inactive-link">@item.HotelName</a>
+				</h2>
+		   	</td>
+                  @*  <td><img class="avatar-img rounded-circle" src="data:image;base64,@Convert.ToBase64String(item.HotelPicture)" /></td>
+                    <td> @Html.DisplayFor(m => item.HotelName)</td>*@
+                    <td> @Html.DisplayFor(m => item.ManagerName)</td>
+                    <td> @Html.DisplayFor(m => item.HotelAddress)</td>
+                    <td> @Html.DisplayFor(m => item.City)</td>
+                    <td> @Html.DisplayFor(m => item.State)</td>
+                    <td> @Html.DisplayFor(m => item.Phone1)</td>
+                    <td> @Html.DisplayFor(m => item.Phone2)</td>
+                    <td> @Html.DisplayFor(m => item.ManegerPhone)</td>
+                  
+                    <td style="width:15px">
+                        <partial name="_OpreationButtonPartial" model="item.HotelEntityId" />
+                    </td>
+                </tr>
+                    }
+                    <partial name="_CreateButtonPartial">
+                      
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /Recent Orders -->
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.es.min.js"></script>
+<script   src="~/admin/assets/js/jspdf.es.min.js"></script>
+<script>
+  function generatePDF() {
+    const doc = new jsPDF();
+    const table = document.getElementById('yourTableId');
+    const tableDataURL = table.toDataURL();
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = doc.internal.pageSize.getHeight();
+    doc.addImage(tableDataURL, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+    doc.save('table.pdf');
+  }
+  document.getElementById('printButton').addEventListener('click', generatePDF);
+</script>

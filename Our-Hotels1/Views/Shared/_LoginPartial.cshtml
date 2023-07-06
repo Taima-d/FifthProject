@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using My_Tables.Entities
+@inject SignInManager<UserEntity> SignInManager
+@inject UserManager<UserEntity> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <li class="login-link">
+        <a  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+    </li>
+    <li class="nav-item">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button  type="submit">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="login-link">
+        <a asp-area="Identity" asp-page="/Account/Login">Login / Signup</a>
+    </li>
+}
+

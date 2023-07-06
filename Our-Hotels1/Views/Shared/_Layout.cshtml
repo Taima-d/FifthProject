@@ -1,0 +1,465 @@
+﻿@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using Microsoft.AspNet.Identity;
+@using Our_Hotels1.Resources.Views.Shared
+@inject IStringLocalizer<LayoutResource> localizer2
+@inject SignInManager<UserEntity> SignInManager
+@{
+	//	var home = new Home(typeof(Rescources);
+	//IStringLocalizer<LayoutResource> answerLocal
+	var ba = localizer2["Home"];
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="utf-8">
+		<title>Doccure</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+		<!-- Favicons -->
+		<link href="/assets/img//assets/img/logo.png" rel="icon">
+		
+		<!-- Bootstrap CSS -->
+		<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+		
+		<!-- Fontawesome CSS -->
+		<link rel="stylesheet" href="/assets/plugins/fontawesome/css/fontawesome.min.css">
+		<link rel="stylesheet" href="/assets/plugins/fontawesome/css/all.min.css">
+		
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="/assets/css/style.css">
+		@if(CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+	{
+		  <link rel="stylesheet"
+              href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+              integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+              crossorigin="anonymous" />
+			  <style>
+			
+			@*  .fa-angle-double-right:before {
+               content: "\f100";
+}*@
+			  </style>
+			 
+	}
+	@*	 @if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+    {
+        <link rel="stylesheet"
+              href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+              integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+              crossorigin="anonymous" />
+    }*@
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+			<script src="assets/js/html5shiv.min.js"></script>
+			<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	
+	</head>
+	<body class="account-page">
+
+		<!-- Main Wrapper -->
+		<div class="main-wrapper">
+		
+			<!-- Header -->
+			<header class="header">
+				<nav class="navbar navbar-expand-lg header-nav">
+					<div class="navbar-header">
+						<a id="mobile_btn" href="javascript:void(0);">
+							<span class="bar-icon">
+								<span></span>
+								<span></span>
+								<span></span>
+							</span>
+						</a>
+						<a href="index-2.html" class="navbar-brand logo">
+							<img src="/assets/img/log-in1.jpg" class="img-fluid" alt="Logo">
+						</a>
+					</div>
+					<div class="main-menu-wrapper">
+						<div class="menu-header">
+							<a href="index-2.html" class="menu-logo">
+								<img src="/assets/img/logo.png" class="img-fluid" alt="Logo">
+							</a>
+							<a id="menu_close" class="menu-close" href="javascript:void(0);">
+								<i class="fas fa-times"></i>
+							</a>
+						</div>
+						<ul class="main-nav">
+							<li>
+								<a asp-action="Index.html">@localizer2["Home"]</a>
+							</li>
+						
+							@if (Program.loginUserDto.type_Of == "Hotel")
+						{
+								<li class="has-submenu">
+								<a href="#">Hotels <i class="fas fa-chevron-down"></i></a>
+							    	<ul class="submenu">
+									<li><a href="doctor-dashboard.html">@localizer2["Hotel Dashboard"] </a></li>
+									<li><a asp-controller="Room" asp-action="AddRooms" >@localizer2["Add rooms"]</a></li>
+									<li><a asp-controller="Hotel" asp-action="RoomsList" >@localizer2["All rooms"]</a></li>
+									<li><a asp-controller="Room" asp-action="AddSuit">@localizer2["Add Suit"] </a></li>
+									<li><a href="my-patients.html">@localizer2["Customer List"] </a></li>
+									@*<li><a href="patient-profile.html">@localizer2["Customer Profile"] </a></li>*@
+								@*	<li><a href="chat-doctor.html">Chat</a></li>
+									<li><a href="invoices.html">Invoices</a></li>*@
+									<li><a asp-controller="Hotel" asp-action="EditHotelProfileSetting">@localizer2["Profile Settings"]  </a></li>
+									<li><a href="reviews.html">@localizer2["Reviews"] </a></li>
+									<li><a href="doctor-register.html">@localizer2["Hotel Register"] </a></li>
+									<li><a asp-controller="Hotel" asp-action="AddHotelServices">@localizer2["Add Hotel Services"] </a></li>
+								</ul>
+							    </li>
+									
+					 }
+								else if(Program.loginUserDto.type_Of =="Customer" || Program.AddUserDto.UserType=="Customer")
+								{
+							<li class="has-submenu">
+								<a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									<li><a href="search.html">@localizer2["Search Hotels"] </a></li>
+									<li><a href="doctor-profile.html">@localizer2["Hotel Profile"] </a></li>
+									<li><a href="booking.html">@localizer2["Booking"] </a></li>
+									@*<li><a href="checkout.html">Checkout</a></li>*@
+									@*<li><a href="booking-success.html">Booking Success</a></li>*@
+									<li><a href="patient-dashboard.html">@localizer2["Customer Dashboard"] </a></li>
+									<li><a href="favourites.html">@localizer2["Favourite hotels"]</a></li>
+									@*<li><a href="chat.html">Chat</a></li>*@
+									<li><a href="profile-settings.html">@localizer2["Profile Settings"] </a></li>
+									<li><a href="change-password.html">@localizer2["Change Password"] </a></li>
+								</ul>
+							</li>
+							}
+							<li class="has-submenu active">
+								<a href="#">@localizer2["Pages"]<i class="fas fa-chevron-down"></i></a>
+								<ul class="submenu">
+									
+									<li><a href="search.html">@localizer2["Search Hotels"] </a></li>
+									@*<li><a href="calendar.htmllo">Calendar</a></li>*@
+									@*<li><a href="components.html">Components</a></li>*@
+									@*<li class="has-submenu">
+										<a href="invoices.html">Invoices</a>
+										<ul class="submenu">
+											<li><a href="invoices.html">Invoices</a></li>
+											<li><a href="invoice-view.html">Invoice View</a></li>
+										</ul>
+									</li>*@
+									<li><a href="blank-page.html">@localizer2["Starter Page"] </a></li>
+									<li><a href="login.html">@localizer2["Login"] </a></li>
+									<li class="active"><a href="register.html">@localizer2["Register"] </a></li>
+									@*<li><a href="forgot-password.html">Forgot Password</a></li>*@
+								</ul>
+							</li>
+							@if(Program.loginUserDto.type_Of == "Admin" && SignInManager.IsSignedIn(User))
+							{
+
+					   <li>
+								<a asp-controller="Admin" asp-action="Index" > @localizer2["Admin"]</a>
+				   	  </li>
+						}		
+							  @if (SignInManager.IsSignedIn(User))
+						{
+							<li class="login-link">
+								<a asp-area="Identity" asp-page="/Account/Login"  asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">@localizer2["Logout"]</a>
+							</li>
+						}
+						else
+						{
+							<li class="login-link">
+								<a asp-area="Identity" asp-page="/Account/Login"> @localizer2["Login/Signup"] </a>
+							</li>
+						}
+						</ul>
+					</div>		 
+					<ul class="nav header-navbar-rht">
+						<li class="nav-item contact-item">
+							<div class="header-contact-img">
+								<i class="far fa-hospital"></i>							
+							</div>
+							<div class="header-contact-detail">
+								<p class="contact-header">Contact</p>
+								<p class="contact-info-header"> +1 315 369 5943</p>
+							</div>
+							
+						</li>
+				
+					
+						  @if (SignInManager.IsSignedIn(User))
+					{
+						<li class="login-link">
+							<a  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
+
+						</li>
+						<li class="login-link">
+							<form  asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+								<button  type="submit">Logout</button>
+							</form>
+						</li>
+
+						@*<li class="login-link">
+							<a asp-area="Identity" asp-page="/Account/Register"  asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">Logout</a>
+							</li>*@
+					}
+						
+						else
+						{
+							<li class="login-link">
+								<a asp-area="Identity" asp-page="/Account/Login">Login / Signup</a>
+							</li>
+						}
+                         
+					
+						
+
+					</ul>
+					<div style="margin-left:20px">
+			<partial name="_selectLanguagePartial"/>
+	</div>
+				</nav>
+
+			</header>
+			<!-- /Header -->
+
+			</div>		
+			<!-- /Page Content -->
+			<div>
+          @RenderBody()
+		
+		   
+		</div>
+
+   	<!-- Footer -->
+			<footer class="footer">
+				
+				<!-- Footer Top -->
+				<div class="footer-top">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-lg-3 col-md-6">
+							
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-about">
+									<div class="footer-logo">
+										<img src="assets/img/footer-logo.png" alt="logo">
+									</div>
+									<div class="footer-about-content">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+										<div class="social-icon">
+											<ul>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-twitter"></i> </a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+												</li>
+												<li>
+													<a href="#" target="_blank"><i class="fab fa-dribbble"></i> </a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+							@if(CultureInfo.CurrentCulture.Name.StartsWith("en"))
+						{
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+    <h2 class="footer-title">@localizer2["For Customers"]</h2>
+    <ul>
+        <li><a href="search.html"><i class="fas fa-angle-double-right"></i> @localizer2["Search for Hotels"]</a></li>
+        <li><a href="login.html"><i class="fas fa-angle-double-right"></i> @localizer2["Login"]</a></li>
+        <li><a href="register.html"><i class="fas fa-angle-double-right"></i> @localizer2["Register"]</a></li>
+        <li><a href="booking.html"><i class="fas fa-angle-double-right"></i> @localizer2["Booking"]</a></li>
+        <li><a href="patient-dashboard.html"><i class="fas fa-angle-double-right"></i> @localizer2["Customer Dashboard"]</a></li>
+    </ul>
+</div>
+								<!-- /Footer Widget -->
+						}
+						else if(CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+						{
+						<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+    <h2 class="footer-title">@localizer2["For Customers"]</h2>
+    <ul>
+        <li><a href="search.html"> @localizer2["Search for Hotels"]</a><i class="fas fa-angle-double-left" style="color:white"></i> </li>
+        <li><a href="login.html"> @localizer2["Login"]</a><i class="fas fa-angle-double-left" style="color:white"></i> </li>
+        <li><a href="register.html"> @localizer2["Register"]</a><i class="fas fa-angle-double-left" style="color:white"></i> </li>
+        <li><a href="booking.html"> @localizer2["Booking"]</a><i class="fas fa-angle-double-left" style="color:white"></i> </li>
+        <li><a href="patient-dashboard.html"> @localizer2["Customer Dashboard"]</a><i class="fas fa-angle-double-left" style="color:white"></i> </li>
+    </ul>
+</div>
+								<!-- /Footer Widget -->
+
+						
+						}
+							
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+								@if(CultureInfo.CurrentCulture.Name.StartsWith("en"))
+								{
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">@localizer2["For Hotels"]</h2>
+									<ul>
+										@*<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>*@
+										@*<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>*@
+										<li><a href="login.html"><i class="fas fa-angle-double-right" style="color:white"></i> @localizer2["Login"] </a></li>
+										<li><a href="doctor-register.html"><i class="fas fa-angle-double-right" style="color:white"></i> @localizer2["Register"]</a></li>
+										<li><a href="doctor-dashboard.html"><i class="fas fa-angle-double-right" style="color:white"></i>@localizer2["Hotel Dashboard"] </a></li>
+									</ul>
+								</div>
+								<!-- /Footer Widget -->
+								
+								
+								}
+								else if(CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+								{
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-menu">
+									<h2 class="footer-title">@localizer2["For Hotels"]</h2>
+									<ul>
+										@*<li><a href="appointments.html"><i class="fas fa-angle-double-right"></i> Appointments</a></li>*@
+										@*<li><a href="chat.html"><i class="fas fa-angle-double-right"></i> Chat</a></li>*@
+										<li> <a href="login.html"> @localizer2["Login"]</a> <i class="fas fa-angle-double-left" style="color:white"></i> </li>
+										<li><a href="doctor-register.html"> @localizer2["Register"]</a><i class="fas fa-angle-double-left" style="color:white"></i></li>
+										<li><a href="doctor-dashboard.html"> @localizer2["Hotel Dashboard"] </a> <i class="fas fa-angle-double-left" style="color:white"></i></li>
+									</ul>
+								</div>
+								<!--/Footer Widget -->
+								
+								
+								}
+								
+								
+							</div>
+							
+							<div class="col-lg-3 col-md-6">
+							@if(CultureInfo.CurrentCulture.Name.StartsWith("en"))
+							{
+							<!-- Footer Widget -->
+								<div class="footer-widget footer-contact">
+									<h2 class="footer-title">@localizer2["Contact Us"] </h2>
+									<div class="footer-contact-info">
+										<div class="footer-address">
+											<span><i class="fas fa-map-marker-alt"></i></span>
+											<p> @localizer2["Syria,Aleppo"] <br> @*California, CA 94108*@ </p>
+										</div>
+										<p>
+											<i class="fas fa-phone-alt"></i>
+											+963 965565457
+										</p>
+										<p class="mb-0">
+											<i class="fas fa-envelope"></i>
+											doccure@example.com
+										</p>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+							
+							}
+								else if (CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+								{
+								<!-- Footer Widget -->
+								<div class="footer-widget footer-contact">
+									<h2 class="footer-title">@localizer2["Contact Us"] </h2>
+									<div class="footer-contact-info">
+										
+											<p> @localizer2["Syria,Aleppo"]
+											<i class="fas fa-map-marker-alt"></i>
+											</p>
+										
+										<p>
+											+963 965565457
+											<i class="fas fa-phone-alt"></i>
+
+										</p>
+										<p class="mb-0">
+											doccure@example.com
+											<i class="fas fa-envelope"></i>
+
+										</p>
+									</div>
+								</div>
+								<!-- /Footer Widget -->
+								
+								
+								}
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<!-- /Footer Top -->
+				
+				<!-- Footer Bottom -->
+                <div class="footer-bottom">
+					<div class="container-fluid">
+					
+						<!-- Copyright -->
+						<div class="copyright">
+							<div class="row">
+								<div class="col-md-6 col-lg-6">
+									<div class="copyright-text">
+										<p class="mb-0"><a href="templateshub.net">Our-Hotels</a></p>
+									</div>
+								</div>
+								<div class="col-md-6 col-lg-6">
+								
+									<!-- Copyright Menu -->
+									<div class="copyright-menu">
+										<ul class="policy-menu">
+											<li><a href="term-condition.html">@localizer2["Terms and Conditions"] </a></li>
+											<li><a href="privacy-policy.html">@localizer2["Policy"] </a></li>
+										</ul>
+									</div>
+									<!-- /Copyright Menu -->
+									
+								</div>
+							</div>
+						</div>
+						<!-- /Copyright -->
+						
+					</div>
+				</div>
+				<!-- /Footer Bottom -->
+			</footer>
+			<!-- /Footer -->
+	   <!-- /Main Wrapper -->
+	  
+		<!-- jQuery -->
+		<script src="assets/js/jquery.min.js"></script>
+		
+		<!-- Bootstrap Core JS -->
+		<script src="/assets/js/popper.min.js"></script>
+		<script src="/assets/js/bootstrap.min.js"></script>
+		
+		<!-- Slick JS -->
+		<script src="/assets/js/slick.js"></script>
+		
+		<!-- Custom JS -->
+		<script src="/assets/js/script.js"></script>
+		
+	</body>
+
+<!-- doccure/  30 Nov 2019 04:11:53 GMT -->
+</html>
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false) 
+	  @await Component.InvokeAsync("NToastNotify")
+	

@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model List<OurHotels.Dto.Customer.CustomerDto>
+<div class="content container-fluid">
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 class="page-title">Welcome Admin!</h3>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active">Customers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /Page Header -->
+    <!-- Recent Orders -->
+    <div class="card card-table flex-fill">
+        <div class="card-header">
+            <h4 class="card-title">Customers List</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsifve">
+                <table class="table table-hover table-center mb-0">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>phone Number</th>
+                            <th>Gender</th>
+                            <th>Identity Certificate</th>
+                            <th>Customer's Birthday</th>
+                          
+
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td> @Html.DisplayFor(m => item.FirstName)</td>
+                            <td> @Html.DisplayFor(m => item.LastName)</td>
+                            <td> @Html.DisplayFor(m => item.phoneNumber)</td>
+                            <td> @Html.DisplayFor(m => item.gender)</td>
+                            <td> @Html.DisplayFor(m => item.Identity_Certificate)</td>
+                            <td> @Html.DisplayFor(m => item.Birthday)</td>
+                            <td style="width:15px">
+                                <partial name="_OpreationButtonPartialCustomer" model="item.CustomerEntityId" />
+                            </td>
+                        </tr>
+                    }
+                    @*<partial name="_CreateButtonPartialCustomer">*@
+
+                </table>
+                        <a class="btn btn-primary" href="@Url.Action("CreateC", "Admin")>Add New</a>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Recent Orders -->
+
+</div>

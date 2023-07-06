@@ -1,0 +1,110 @@
+﻿@model OurHotels.Dto.Hotel.AddHotelFromAdminDto
+@using OurHotels.Dto.Hotel
+@{
+    Layout = "_AdminLayout";
+}
+@{
+
+    var model = new AddHotelFromAdminDto();
+}
+<link href="~/css/site.css" rel="stylesheet" />
+    < br />
+    < h2 class="text-info">Create Hotel</h2>
+
+<br />
+<div id="addEmployeeModal" class="whitebg border">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post">
+                < input type="hidden" asp-for="HotelEntityId" />
+                <input type="hidden" asp-for="UserEntityId" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Hotel</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                <div class="form-group ">
+                    <input type="hidden" value="Input.UserType" />
+                    <label asp-for="Email" class="col-form-label" style="color: #730075; font-size: 1.3em; ">Email</label>
+                    <input type="email" asp-for="Email" class="form-control floating" color: #9B54A1;" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Number of stars </label>
+                        <select asp-for="numOfStars" class="form-control select">
+                            <option value=" "></option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+
+                        </select>
+                        <span asp-validation-for="numOfStars" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <label asp-for="Password" class="col-form-label" style="color: #730075; font-size: 1.3em; ">Password</label>
+                    <input asp-for="Password" type="password" class="form-control floating" color: #9B54A1;" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label asp-for="HotelName" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="HotelName" class="form-control" style="color: #9B54A1;" required />
+                        <span asp-validation-for="HotelName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ManagerName" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="ManagerName" class="form-control" style="color: #9B54A1;" required />
+                        <span asp-validation-for="ManagerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HotelAddress" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="HotelAddress" class="form-control" style="color: #9B54A1;" required type="Text" />
+                        <span asp-validation-for="HotelAddress" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <select asp-for="City" style="color: #9B54A1;" class="form-control" asp-items="Html.GetEnumSelectList< OurHotels.Dto.Hotel.City>()" required>
+                        </select><label class="text-info">Choose The City Of The Hotel </label>
+
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="State" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <select asp-for="State" style="color: #9B54A1;" class="form-control" asp-items="Html.GetEnumSelectList< OurHotels.Dto.Hotel.State>()" required>
+                        </select><label class="text-info">Choose The State Of The Hotel </label>
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone1" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="Phone1" style="color: #9B54A1;" class="form-control" required type="Text" />
+                        <span asp-validation-for="Phone1" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone2" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="Phone2" style="color: #9B54A1;" class="form-control" required type="Text" />
+                        <span asp-validation-for="Phone2" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ManegerPhone" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="ManegerPhone" style="color: #9B54A1;" class="form-control" required type="text" />
+                        <span asp-validation-for="ManegerPhone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <partial name="_CreateAndBackToListButtonParial" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+@*@section Scripts{
+        <partial name="_ValidationScriptsPartial" />
+    }*@

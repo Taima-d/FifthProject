@@ -1,0 +1,315 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Microsoft.Extensions.Localization;
+@using Our_Hotels1.Resources.Views.Hotel;
+@using System.Globalization
+@inject IStringLocalizer<HotelProfilesettingResource> Localizer;
+@{
+	Layout = "_HotelLayout";
+     //	HotelDto hotelDto = new HotelDto();
+     HotelDto hotelDto =  ViewData["EditHotelProfileSetting"] != null ? (HotelDto) ViewData["EditHotelProfileSetting"] : null;
+	// HotelDto hotelPhoto =   ViewData["HotelPhoto"] != null ? (HotelDto)   ViewData["HotelPhoto"]: null;
+	string hotelPhoto = Convert.ToBase64String( Program.HotelPic);
+	string Identitycert = Convert.ToBase64String( Program.HotelIdentity);
+	EditHotelDto editHotelDto = new EditHotelDto();
+	var states = OurHotels.Dto.Hotel.State.confirmed;
+	editHotelDto.State = states;
+    var userId = User.Identity.GetUserId();
+	//addHotelDto.UserEntityId = userId;
+}
+@if(CultureInfo.CurrentCulture.Name.StartsWith("ar"))
+	{
+		  <link rel="stylesheet"
+              href="https://cdn.rtlcss.com/bootstrap/v4.5.3/css/bootstrap.min.css"
+              integrity="sha384-JvExCACAZcHNJEc7156QaHXTnQL3hQBixvj5RV5buE7vgnNEzzskDtx9NQ4p6BJe"
+              crossorigin="anonymous" />
+	}
+<style>
+	.profile-picture {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
+.edit-hotel-profile {
+    margin: 20px;
+    padding: 20px;
+	width:100%;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+  }
+</style>
+						<div class="col-md-7 col-lg-8 col-xl-9" style="justify-content:center" >
+							<div class="card">
+								<div class="card-body">
+							
+									<!-- Profile Settings Form -->
+									<form  id='form'asp-action="EditHotelProfileSetting" enctype="multipart/form-data">
+										 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+										 <input type="hidden" asp-for="@editHotelDto.HotelEntityId" />
+										 <input type="hidden" asp-for="@editHotelDto.State" />
+										<div class="row form-row">
+											<div class="col-12 col-md-12">
+												<div class="form-group">
+													<div class="change-avatar">
+														<div class="profile-img">
+															<img src="assets/img/patients/patient.jpg" alt="User Image">
+														</div>
+													
+													</div>
+												</div>
+											</div>
+											<input type="hidden" asp-for="@hotelDto.State" />
+											@*<input type="hidden" asp-for="@addHotelDto.UserEntityId" />*@
+										    	<div class="col-12 col-md-6">
+												<div class="form-group" >
+													<label asp-for="@hotelDto.HotelName">@Localizer["Hotel Name"] </label>
+													<input style="background-color: #e9ecef; opacity:1;" readonly  type="text" class="form-control" asp-for="@hotelDto.HotelName" value="@hotelDto.HotelName">
+													<span asp-validation-for="@hotelDto.HotelName"  class="text-danger"></span>
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+									 				<label asp-for="@editHotelDto.ManagerName">@Localizer["Manger Name"] </label>
+													<input id="manegername" asp-for="@editHotelDto.ManagerName" type="text" class="form-control" value="@hotelDto.ManagerName">
+												     <span id="manegernameV"  class="text-danger"></span>
+												</div>
+											</div>
+											
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label asp-for="@editHotelDto">@Localizer["Number of stars"]  </label>
+													<select id="Numberofstars"  asp-for="@editHotelDto.numOfStars" class="form-control select">
+													
+														<option  value ="0"></option>
+														<option  value="1" >1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value ="5">5</option>
+														
+													</select>
+													  <span id="NumberofstarsV"  class="text-danger"></span>
+												</div>
+											</div>
+											@*asp-items="Html.GetEnumSelectList<Cities>()"*@
+											 <div class="col-12 col-md-6" >
+												<div class="form-group">
+													<label asp-for="@editHotelDto.City">@Localizer["City"] </label>
+												  <select id="city"  class="form-control select"  asp-for="@editHotelDto.City" >
+												      <option  value =" "></option>
+                                                      <option value="Damascus"> Damascus</option>   
+                                                      <option value="Damascus_Countryside">  Damascus_Countryside</option>
+                                                       <option value="Aleppo">   Aleppo</option>
+                                                        <option value="AlHasakah"> AlHasakah</option>
+                                                        <option value="Homs"> Homs</option>
+                                                       <option value="Hama">  Hama</option>
+                                                        <option value="Daraa"> Daraa</option>
+                                                       <option value="Latakia">  Latakia</option>
+                                                        <option value="Tartus">   Tartus</option>
+                                                        <option value="Idlib">   Idlib</option>
+                                                         <option value="AlRaqqah">  AlRaqqah</option>
+                                                          <option value="Alqunaytirah"> Alqunaytirah</option>
+                                                       <option value="DayralZawr">    DayralZawr </option>
+                                                         <option value="AlSuwayda">   AlSuwayda</option>
+
+												  </select>
+
+												<span id="cityValidation" asp-validation-for="@editHotelDto.City" class="text-danger"></span>
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													
+															<label asp-for="@editHotelDto.Phone1">@Localizer["Phone1"]</label>
+														
+													<input asp-for="@editHotelDto.Phone1" id="Phone1"  type="text" value="@hotelDto.Phone1" class="form-control" minlength="9">
+													@*<span asp-validation-for="@editHotelDto.Phone1" class="text-danger"></span>*@
+													</div>
+												
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label asp-for="@editHotelDto.Phone2" > @Localizer["Phone2"]</label>
+													
+														
+													<input type="text" asp-for="@editHotelDto.Phone2" value="@hotelDto.Phone2" id="Phone2" class="form-control" minlength="9">
+													@*<span  asp-validation-for="@editHotelDto.Phone2" class="text-danger"></span>*@
+													
+												</div>
+											</div>
+
+											<div class="text-danger" id="PhoneV"></div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">		
+											<label asp-for="@editHotelDto.ManegerPhone">@Localizer["Manger Phone"] </label>
+													<div class="input-group">
+														 <div class="input-group-prepend">
+	                                                         <span class="input-group-text">+963</span>
+                                                       	</div>
+													<input id="ManegerPhone" asp-for="@editHotelDto.ManegerPhone" type="text" value="@hotelDto.ManegerPhone" class="form-control" minlength="9">
+													<span id="ManegerPhoneV" class="text-danger"></span>
+													</div>
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+												<label id="HotelAddress" asp-for="@editHotelDto.HotelAddress">@Localizer["Address"]</label>
+													<input type="text" asp-for="@editHotelDto.HotelAddress" class="form-control" value="@hotelDto.HotelAddress">
+													<span id="HotelAddressV" class="text-danger"></span>
+												</div>
+											</div>
+
+											
+										
+                                   											
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label asp-for="@editHotelDto.Description">@Localizer["Description"]</label>
+													<textarea rows="5" cols="5" placeholder="Write here" asp-for="@editHotelDto.Description" class="form-control">@hotelDto.Description</textarea>
+												
+												</div>		
+										</div>
+										<div class="edit-hotel-profile">
+											 <div class="row">
+										<div class="col-12 col-md-6">
+												<div class="form-group">
+													@*<label asp-for="@addHotelDto.HotelPicture"> </label>*@
+													@if(editHotelDto.HotelPicture != null )
+													{
+													<img class="profile-picture mt-25" id="HotelPicture"alt="HotelPicture" src="data:image/*;base64,@(Convert.ToBase64String(@editHotelDto.HotelPicture))">
+						                        	   
+												}
+													else
+						                          	{
+							                       <img class="profile-picture mt-25" id="HotelPicture"alt="HotelPicture" src="data:image;base64,@hotelPhoto">
+												   
+						                          }
+							                      <div class="custome-file mt-2" >
+													  <input type="file" 
+													  accept="image/*"
+													   asp-for="@editHotelDto.HotelPicture"
+													 
+													   class="custom-file-input"
+													      onchange="document.getElementById('HotelPicture').src = window.URL.createObjectURL(this.files[0])"
+													  />
+												<label class="custom-file-label" asp-for="@editHotelDto.HotelPicture" > Choose file picutre for your hotel..</label>
+												<span class ="text-danger" asp-validation-for="@editHotelDto.HotelPicture"></span>
+												  </div>
+					
+												</div>
+									
+
+										</div>
+									
+											
+										<div class="col-12 col-md-6 ml-md-1">
+												<div class="form-group">
+							                       <img class="profile-picture mt-25" alt="HotelPicture" src="data:image;base64,@Identitycert">	  
+												</div>		
+										</div>
+										</div>
+										
+										</div>
+												
+										
+										</div>
+										<div class="submit-section">
+											<button type="submit" asp-controller="Hotel" asp-action="EditHotelProfileSetting" class="btn btn-primary submit-btn">Save Changes</button>
+										</div>
+									</form>
+									<!-- /Profile Settings Form -->
+									
+								</div>
+							</div>
+					</div>
+						
+	
+					<script src="~/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script src="~/assets/js/Forvalidation.js"></script>
+
+<script>
+    // Assuming you have a variable `hotelDto` that holds the HotelDto object
+
+    $(document).ready(function() {
+        // Get the number of stars from the HotelDto
+        var numOfStars = @hotelDto.numOfStars;
+
+        // Find the select element for the number of stars
+     
+		$('#Numberofstars').val(numOfStars);
+  
+    // Remove the selected option from the dropdown
+    $('#Numberofstars option[value="' + numOfStars + '"]').remove();
+     if (numOfStars !== '') {
+        $('#Numberofstars').prepend($('<option></option>').val(numOfStars).text(numOfStars));
+        $('#Numberofstars').val(numOfStars);
+    }
+
+
+
+  var selectedCity = '@hotelDto.City';
+    
+    $('#city option[value="' + selectedCity + '"]').remove(); // Remove the selected option if it exists
+
+    if (selectedCity !== '') {
+        $('#city').prepend($('<option></option>').val(selectedCity).text(selectedCity));
+        $('#city').val(selectedCity);
+    }
+	 $('form').submit(function(event) {
+            // Clear any previous error messages
+            $('.text-danger').empty();
+
+            // Get the values of the inputs
+           
+            var managerPhone = $('#ManegerPhone').val();
+            var phone1 = $('#Phone1').val();
+            var phone2 = $('#Phone2').val();
+            var managerName = $('#manegername').val();
+
+            // Set a flag to track if there are any validation errors
+            var hasErrors = false;
+			 // Validate Number of Stars
+            if (numOfStars.trim() === '0') {
+                $('#NumberofstarsV').text('Please select the number of stars');
+                hasErrors = true;
+            }
+
+            // Validate City
+            if (selectedCity.trim() === 'value1') {
+                $('#cityValidation').text('Please select a city');
+                hasErrors = true;
+            }
+
+            // Validate Manager Phone
+            if (managerPhone.trim() === '') {
+                $('#ManegerPhoneV').text('Please enter the manager phone number');
+                hasErrors = true;
+            }
+
+            // Validate Phone 1 and Phone 2
+            if (phone1.trim() === '' && phone2.trim() === '') {
+                $('#PhoneV').text('Please enter at least one phone number');
+                hasErrors = true;
+            }
+
+            // Validate Manager Name
+            if (managerName.trim() === '') {
+                $('#manegernameV').text('Please enter the manager name');
+                hasErrors = true;
+            }
+			alert(hasErrors);
+            // Prevent form submission if there are validation errors
+            if (hasErrors) {
+                event.preventDefault();
+				alert('prevent'+hasErrors);
+            }
+        });
+    });
+
+    
+
+</script>
+
+

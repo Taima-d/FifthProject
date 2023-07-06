@@ -1,0 +1,6 @@
+﻿@model int
+<div class="btn-group" role="group">
+    <a asp-action="DetailsHotel" class="btn btn-success text-white" asp-route-id="@Model"><i class="fa-solid fa-list"></i></a>
+    <a asp-action="EditHotel" class="btn btn-primary text-white" asp-route-id="@Model"><i class="fa-solid fa-pen-to-square"></i></a>
+    <a asp-action="Delet" class="btn btn-danger text-white confiermDelation" asp-route-id="@Model"><i class="fa-solid fa-trash-can"></i></a>
+</div>

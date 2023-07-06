@@ -1,0 +1,57 @@
+﻿@model List< OurHotels.Dto.Hotel.RoomDto>
+@{
+	Layout = "_HotelLayout";
+	string l;
+}
+<div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="row row-grid">
+								<div class="col-md-6 col-lg-4 col-xl-3">
+									<div class="card widget-profile pat-widget-profile">
+										@foreach(var item in Model)
+										{
+										<div class="card-body">
+											<div class="pro-widget-content">
+												<div class="profile-info-widget">
+							
+													<div class="profile-det-info">
+														<h3><a href="patient-profile.html"></a></h3>
+														
+														<div class="patient-details">
+															@*<h5><b>Customer ID :</b> @Model.HotelEntityId</h5>*@
+															<h5 class="mb-0"><i class="fas fa-map-marker-alt">@item.RoomNum </i> @item.RoomDirection1,@item.RoomDirection2</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="patient-info">
+												<ul>
+													<li>Phone <span>@item.phone</span></li>
+													<li>price <span>@item.Price</span></li>
+
+												</ul>
+											</div>
+											<ul class="clinic-gallery">
+							@foreach(var im in item.Images)
+							{
+								<li>
+						
+								
+													<a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
+														<img src="@im.Url.Replace("C:\\Users\\ASUS\\source\\repos\\Our-Hotels1\\Our-Hotels1\\wwwroot\\", "~/").ElementAt(1);" alt="Feature">
+													@*l=@im.Url.Replace("C:\\Users\\ASUS\\source\\repos\\Our-Hotels1\\Our-Hotels1/wwwroot/assets/img/rooms\", "~/assets/img/rooms/").Substring(1);*@
+													@*l=@im.Url.Replace("wwwroot",string.Empty).ElementAt(1);*@
+													l=@im.Url.Replace("wwwroot/",string.Empty).Replace("/","\\").ElementAt(1);
+													</a>
+												</li>
+							}
+												
+												
+											</ul>
+										</div>
+										}
+									</div>
+									
+								</div>
+		
+							</div>
+						</div>

@@ -1,0 +1,12 @@
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\bin\Debug\net5.0\OurHotels1.Dto.deps.json
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\bin\Debug\net5.0\OurHotels1.Dto.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\bin\Debug\net5.0\ref\OurHotels1.Dto.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\bin\Debug\net5.0\OurHotels1.Dto.pdb
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.csproj.AssemblyReference.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\ref\OurHotels1.Dto.dll
+C:\Users\ASUS\source\repos\Our-Hotels1\OurHotels1.Dto\obj\Debug\net5.0\OurHotels1.Dto.pdb

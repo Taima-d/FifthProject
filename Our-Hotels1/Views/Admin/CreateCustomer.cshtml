@@ -1,0 +1,152 @@
+﻿@model OurHotels.Dto.Customer.AddCustomerDto;
+@using OurHotels.Dto.Customer;
+
+@{
+    Layout = "_AdminLayout";
+    //AddCustomerDto addCustomerDto = new AddCustomerDto();
+
+    //var userId = User.Identity.GetUserId();
+    //addCustomerDto.UserEntityId = userId;
+    var model = new AddCustomerDto();
+}
+
+@*@section scripts 
+{
+    <script>
+        function previewIdentityCertificate(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#IdentityCertificate').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+ 
+    </script>
+}*@
+    <style>
+        .profile-picture {
+            height: 200px;
+            width: 200px;
+            object-fit: cover;
+        }
+    </style>
+    @*<script src="~/js/site.js"></script>*@
+
+
+    <link href="~/css/site.css" rel="stylesheet" />
+    <br />
+    <h2 class="text-info">Create Customer</h2>
+
+    <br />
+    <div id="addCustomerModal" class="whitebg border">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post">
+                    <input type="hidden" name="CustomerEntityId" asp-for="CustomerEntityId" />
+                    @*<input type="hidden" asp-for="UserEntityId" />*@
+
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Customer</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-form-label" style="color: #730075; font-size: 1.3em; ">Email</label>
+                        <input type="email" name="Email" asp-for="Email" class="form-control floating" style="color: #9B54A1;">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password" class="col-form-label" style="color: #730075; font-size: 1.3em; ">Password</label>
+                        <input asp-for="Password" name="Password" type="password" class="form-control floating" style="color: #9B54A1;">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FirstName" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input asp-for="FirstName" class="form-control" style="color: #9B54A1;" required />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LastName" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input  asp-for="LastName" class="form-control" style="color: #9B54A1;" required />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="phoneNumber" class="col-form-label" style="color: #730075; font-size: 1.3em; "></label>
+                        <input name="phoneNumber" asp-for="phoneNumber" class="form-control" style="color: #9B54A1;" required type="number" />
+                        <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <select name="gender" asp-for="gender" class="form-control select">
+                            <option value=" ">Choose The Gender Of The Customer</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                    </div>
+
+
+                    @*<div class="custome-file mt-4">
+                        <input type="file"
+                               asp-for="Identity_Certificate"
+                               class="custom-file-input"
+                               onchange="previewIdentityCertificate(this)" />
+                        <label class="custom-file-label" asp-for="Identity_Certificate">Choose identity certificate picture..</label>
+                        <span class="text-danger" asp-validation-for="Identity_Certificate"></span>
+                    </div>*@
+
+                    @*<div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Identity_Certificate">Identity Certifecate photo </label>
+                                @if (Model.Identity_Certificate != null)
+                                {
+                                    <img class="Identity_Certificate_photo " id="IdentityCertificate" alt="Identity Certifacre" src="data:image/*,base64,@(Convert.ToBase64String(Model.Identity_Certificate))">
+                                }
+                                else
+                                {
+                                    <img class="profile-picture " id="IdentityCertificate" alt="Identity Certifacre" src="/assets/img/avatar-male.jpg">
+
+                                }
+                                <div class="custome-file mt-4">
+                                    <input type="file"
+                                           accept="image/*"
+                                           asp-for="Identity_Certificate"
+                                           class="custom-file-input"
+                                           onchange="document.getElementById('IdentityCertificate').src = window.URL.createObjectURL(this.files[0])" />
+                                    <label class="custom-file-label" asp-for="Identity_Certificate"> Choose identity certificate picture..</label>
+                                    <span class="text-danger" asp-validation-for="Identity_Certificate"></span>
+                                </div>
+
+                            </div>
+                        </div>*@
+
+
+                    <div class="form-group">
+                        <label asp-for="Birthday" class="col-form-label" style="color: #730075; font-size: 1.3em;"></label>
+                        <input name="Birthday" asp-for="Birthday" style="color: #9B54A1;" class="form-control" required type="date" />
+                        <span asp-validation-for="Birthday" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <div class="row">
+                         <div class="col-6">
+                     <input type="submit" asp-controller="Admin" asp-action="CreateC" class="btn btn-primary form-control text-white" value="Create" />
+                       </div>
+                        <div class="col-6 ">
+                        <a asp-action="Index" class="btn btn-success form-control text-white ">Back To List </a>
+                       </div>
+                             </div>
+                        @*<partial name="_CreateAndBackToListButtonParialCustomer" />*@
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

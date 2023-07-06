@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "_HotelLayout";
+    List<Hotel_ExtraDto> servicesDtoLists = new List<Hotel_ExtraDto>();
+    servicesDtoLists.Add(new Hotel_ExtraDto()); // Add an initial empty item to the list
+}
+<!-- Rest of your code -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    @for (int i = 0; i < servicesDtoLists.Count; i++)
+                    {
+                        <div style="width:100%" class="service">
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Name of service</label>
+                                <div class="col-md-10">
+                                    <input type="text" asp-for="@servicesDtoLists[i].Name" class="form-control form-control-lg" placeholder=".form-control-lg">
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 row">
+                                <label class="col-form-label col-md-2">Price</label>
+                                <div class="col-md-10">
+                                    <input type="text" asp-for="@servicesDtoLists[i].Price" class="form-control form-control-sm" placeholder=".form-control-sm">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-form-label col-md-2">Description</label>
+                                <div class="col-md-10">
+                                    <textarea rows="5" cols="5" asp-for="@servicesDtoLists[i].Description" class="form-control" placeholder="Enter text here"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="form-group row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" onclick="repeatInputs()">Repeat</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function repeatInputs() {
+        var lastService = document.querySelector('.service:last-of-type');
+        var clone = lastService.cloneNode(true);
+        var inputs = clone.querySelectorAll('input[type="text"], textarea');
+        inputs.forEach(function(input) {
+            input.value = '';
+        });
+        lastService.parentNode.insertBefore(clone, lastService.nextSibling);
+    }
+</script>
+

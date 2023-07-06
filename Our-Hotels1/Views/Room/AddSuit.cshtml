@@ -1,0 +1,107 @@
+﻿@{
+    Layout = "_HotelLayout";
+	AddSuitDto addSuitDto = new AddSuitDto();
+}
+<div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="card">
+								<div class="card-body">
+
+<form method="post"  enctype="multipart/form-data">
+<div class="row form-row">
+
+	<div class="col-12 col-md-6">
+		<input type="hidden" asp-for="@addSuitDto.HotelEntityId" />
+	<div class="form-group">
+	<label>Room number</label>
+	<input type="text" asp-for="@addSuitDto.RoomNum" class="form-control" value="@addSuitDto.RoomNum" >
+	<span class="text-danger"></span>
+	</div>
+	</div>
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label asp-for="@addSuitDto.phone"> Room phone</label>
+	<input  asp-for="@addSuitDto.phone" type="tel" class="form-control" >
+	<span asp-validation-for="@addSuitDto.phone"  class="text-danger"></span>
+	</div>
+	</div>
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label asp-for="@addSuitDto.numOfBeds"> Number of bed</label>
+	<input type="number" asp-for="@addSuitDto.numOfBeds" class="form-control" >
+	<span asp-validation-for="@addSuitDto.numOfBeds" class="text-danger"></span>
+	</div>
+	</div>
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label asp-for="@addSuitDto.Date" >Date </label>
+	<input type="datetime" asp-for="@addSuitDto.Date" class="form-control">
+	<span  asp-validation-for="@addSuitDto.Date"  class="text-danger"></span>
+	</div>
+	</div>
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label>Room direction</label>
+	
+	<select asp-for="@addSuitDto.RoomDirection1" class="form-control">
+	 <option >Nourth</option>
+	 <option>South</option>
+ </select>
+ <select  asp-for="@addSuitDto.RoomDirection2"  class="form-control">
+	 <option>West</option>
+	 <option>East</option>
+ </select>
+	</div>
+	</div>
+
+	
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label>Room size</label>
+	<div class="input-group">
+	<input asp-for="@addSuitDto.RoomSizeH" type="text" placeholder="Height" class="form-control" >
+	 <div class="input-group-append">
+	<span class="input-group-text">.cm</span>
+	</div>
+	</div>
+	<div class="input-group">
+	<input asp-for="@addSuitDto.RoomSizeW" type="text" placeholder="Width" class="form-control" >
+	 <div class="input-group-append">
+	<span class="input-group-text">.cm</span>
+	</div>
+	</div>
+	<span   class="text-danger"></span>
+	</div>
+	</div>
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label>Price of room</label>
+	<input asp-for="@addSuitDto.Price" type="text"placeholder="Per night" class="form-control" >
+	<span asp-validation-for="@addSuitDto.Price"  class="text-danger"></span>
+	</div>
+	</div>
+
+	<div class="col-12 col-md-6">
+	<div class="form-group">
+	<label asp-for="@addSuitDto.Floor" >Room's Floor</label>
+	<input type="number" asp-for="@addSuitDto.Floor" class="form-control" >
+	<span asp-asp-validation-for="@addSuitDto.Floor"    class="text-danger"></span>
+	</div>
+	</div>
+	
+										
+</div>
+                    <div class="submit-section">
+				     	<button type="submit" class="btn btn-primary submit-btn">Save Changes</button>
+				</div>
+</form>
+</div>
+</div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+

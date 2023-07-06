@@ -1,0 +1,74 @@
+﻿@model List< OurHotels.Dto.Hotel.RoomDto>
+@{
+	Layout = "_HotelLayout";
+}
+<style>
+
+</style>
+		<div class="col-md-7 col-lg-8 col-xl-9">
+							<div class="row row-grid">
+
+			@foreach(var item in Model)
+			{
+								<div class="col-md-6 col-lg-4 col-xl-3">
+
+			<div class="card widget-profile pat-widget-profile">
+
+										<div class="card-body">
+											<div class="pro-widget-content">
+												<div class="profile-info-widget">
+													<a  class="booking-doc-img">
+														<h5>@item.RoomNum</h5>
+													</a>
+													<div class="profile-det-info">
+														<h3>@item.Floor</h3>
+														
+														<div class="patient-details">
+															<h5><b>Room Price :</b> @item.Price</h5>
+															<h5 class="mb-0"><i class="fas fa-map-marker-alt"></i> @item.RoomDirection1, @item.RoomDirection2</h5>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="patient-info">
+												<ul>
+													<li>Beds <span>@item.numOfBeds</span></li>
+													<li>Phone <span>@item.phone</span></li>
+													
+												</ul>
+											</div>
+
+											<ul class="clinic-gallery" style="display: flex; flex-wrap: wrap;">
+												@foreach(var im in item.Images)
+						                               	{
+															   <li  style="flex: 1 0 33.33%; padding: 5px; list-style-type:none">
+													<a class="avatar avatar-sm mr-2" data-fancybox="gallery">
+														
+													<img class="avatar-img rounded-circle" src="~/assets/img/rooms/@im.Url.Split("rooms\\").ElementAt(1)"/>
+													</a>
+												</li>
+							
+                                                          }
+												
+											
+											</ul>
+											<div class="card-footer text-center">
+												
+											 <a href="@Url.Action("EditRoom", "Room", new { RoomId = item.RoomEntityId })" class="btn btn-primary">Edit</a>
+							                <a href="@Url.Action("DeleteRoom", "Room", new { RoomId = item.RoomEntityId })" class="btn btn-danger ml-2">Delete</a>
+                          
+							
+                        </div>
+
+										</div>
+
+								</div>
+							</div>
+
+
+           }
+									</div>
+								
+
+						</div>
+

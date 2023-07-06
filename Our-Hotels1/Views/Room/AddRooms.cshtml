@@ -1,0 +1,483 @@
+﻿@*@model AddRoomDto*@
+
+@{
+    Layout = "_HotelLayout";
+   AddRoomDto addRoom = new AddRoomDto();
+}
+<style>
+    .thumbnail{
+        width: 50%;
+        height:25%;
+    }
+     .checkbox-container {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+        width: 14px;
+        height: 14px;
+        margin: 0;
+        vertical-align: middle;
+    }
+</style>
+<div class="col-md-7 col-lg-8 col-xl-9">
+    <div class="card">
+        <div class="card-body">
+            <form id="uploadForm" method="post" enctype="multipart/form-data">
+                <div class="row form-row">
+                     <div class="col-12 col-md-6">
+                         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="@addRoom.Floor">Room's Floor</label>
+                            <input type="number"  id="Floor"  name="Floor" asp-for="@addRoom.Floor" min="0" class="form-control" />
+                            <span asp-validation-for="@addRoom.Floor" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <input type="hidden" name="HotelEntityId" asp-for="@addRoom.HotelEntityId" />
+                        <input type="hidden" name="RoomEntityId" asp-for="@addRoom.RoomEntityId" />
+                        <div class="form-group">
+                            <label>Room number</label>
+                            <input type="text" id="RoomNum" name="RoomNum" asp-for="@addRoom.RoomNum" class="form-control" disabled/>
+                            <span asp-validation-for="@addRoom.RoomNum" class="text-danger"></span>
+                            <p id="message"></p>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@addRoom.phone">Room phone</label>
+                            <input name="phone" asp-for="@addRoom.phone" id="roomPhone" type="tel" class="form-control" />
+                            <span asp-validation-for="@addRoom.phone" class="text-danger"></span>
+                        </div>
+                    </div>
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@addRoom.Date">Date</label>
+                            <input type="datetime" name="Date" asp-for="@DateTime.Now" value="@DateTime.Now.ToString("yyyy-MM-dd")" readonly class="form-control" />
+                            <span asp-validation-for="@addRoom.Date" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="col-12 col-md-6">
+    <div class="form-group">
+        <label asp-for="@addRoom.spouseBeds">Spouse Bed</label>
+        <div class="checkbox-container">
+            <input name="spouseBedChecked" asp-for="@addRoom.spouseBeds" id="spouseBed" type="checkbox" class="form-control" />
+        </div>
+        <span asp-validation-for="@addRoom.spouseBeds" class="text-danger"></span>
+    </div>
+</div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@addRoom.numOfBeds">Number of beds</label>
+                            <input type="number" name="numOfBeds" asp-for="@addRoom.numOfBeds" class="form-control" min="1" />
+                            <span asp-validation-for="@addRoom.numOfBeds" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                  
+                  
+                  
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Room direction</label>
+                            <select name="RoomDirection1" asp-for="@addRoom.RoomDirection1" class="form-control">
+                                <option>North</option>
+                                <option>South</option>
+                            </select>
+                            <select name="RoomDirection2" asp-for="@addRoom.RoomDirection2" class="form-control">
+                                <option>West</option>
+                                <option>East</option>
+                            </select>
+                        </div>
+                    </div>
+
+                     <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Room size</label>
+                            <div class="input-group">
+                                <input asp-for="@addRoom.RoomSizeH" name="RoomSizeH" type="text" placeholder="Height" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input asp-for="@addRoom.RoomSizeW" name="RoomSizeW" type="text" placeholder="Width" class="form-control" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+
+                      <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Price of room</label>
+                            <div class="input-group">
+                            <input asp-for="@addRoom.Price" name="Price" type="text" placeholder="Per night" class="form-control" />
+                               <div class="input-group-append">
+                                    <span class="input-group-text">SY</span>
+                                </div>
+                            </div>
+                              <span asp-validation-for="@addRoom.Price" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Room count</label>
+                            <input name="roomCount" id="roomCountInput" class="form-control" />
+                            <span id="valofcount" class="text-danger"></span>
+                        </div>
+                    </div>
+               <div class="col-12 col-md-6"></div>
+                   <div class="row">
+   <div class="col-12">
+    <label bold>Room's photos</label>
+    <hr />
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput" name="Images" style="display: none;">
+                <img id="imageThumbnail" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput2" name="Images" style="display: none;">
+                <img id="imageThumbnail2" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput3" name="Images" style="display: none;">
+                <img id="imageThumbnail3" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput4" name="Images" style="display: none;">
+                <img id="imageThumbnail4" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput5" name="Images" style="display: none;">
+                <img id="imageThumbnail5" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+                <input type="file" id="imageInput6" name="Images" style="display: none;">
+                <img id="imageThumbnail6" class="thumbnail" src="~/assets/img/hotels/Hand.jpg" alt="Thumbnail">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-6">
+    <span class="text-danger" id="Vald1"></span>
+</div>
+                </div>
+
+              <div class="col-12 col-md-6"></div>
+
+                <div class="submit-section">
+                    <button id="submitButton" asp-controller="Room" asp-action="AddRooms"  class="btn btn-primary submit-btn">Upload Files and Save Changes</button>
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/assets/js/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+@*<script>
+$(document).ready(function() {
+      $("#Floor").on('input', function() {
+    var floorInput = $("#Floor");
+    var roomNumInput = $("#RoomNum");
+    var messageContainer = $("#message");
+
+    floorInput.on('input', function() {
+        var floor = floorInput.val();
+
+        if (floor && floor.length > 0) {
+            var updatedRoomNum = "";
+            var roomNum = roomNumInput.val();
+
+            for (var i = 0; i < floor.length; i++) {
+                var digit = floor.charAt(i);
+                if (!isNaN(digit)) {
+                    updatedRoomNum += "<strong>" + digit + "</strong>";
+                }
+            }
+
+            roomNumInput.html(updatedRoomNum);
+            roomNumInput.prop('disabled', false);
+            messageContainer.text("");
+        } else {
+            roomNumInput.val("");
+            roomNumInput.prop('disabled', true);
+            messageContainer.text("Please enter a floor number first.");
+        }
+        
+    });
+});
+</script>*@
+
+
+
+<script>
+$(document).ready(function() {
+    $("#Floor").on('input', function() {
+        var floor = $(this).val();
+        var roomNumInput = $("#RoomNum");
+        var roomPhone=$("#roomPhone");
+          var messageContainer = $("#message");
+        if (floor && floor.length > 0) {
+            var updatedRoomNum = "";
+            
+            for (var i = 0; i < floor.length; i++) {
+                var digit = floor.charAt(i);
+                if (!isNaN(digit)) {
+                  
+                      updatedRoomNum += digit;
+                }
+            }
+           
+            roomNumInput.val(updatedRoomNum);
+              roomNumInput.prop('disabled', false);
+            roomPhone.val("0" + updatedRoomNum );
+
+             messageContainer.text("");
+        }
+        else {
+            roomNumInput.val("");
+            roomPhone.val("");
+                roomNumInput.prop('disabled', true);
+            messageContainer.text("Please enter a floor number first.");
+
+        }
+    });
+    $("#RoomNum").on('input', function() {
+        var roomNum = $(this).val();
+        var roomPhone = $("#roomPhone");
+        
+        if (roomNum && roomNum.length > 0) {
+            roomPhone.val("0" + roomNum);
+        }
+    });
+});
+</script>
+
+<script>
+
+  $(document).ready(function() {
+
+
+        $("#submitButton").click(function() {
+          @*   var checked = $('#spouseBed').prop('checked');
+             var value = checked ? 'true' : 'false';*@
+               var checked = $('#spouseBed:checked').val();
+
+       var roomCount = $("#roomCountInput").val();
+       var formData = new FormData($("#uploadForm")[0]);
+       var valofcount= document.getElementById("valofcount");
+       var imageInput = $("#imageInput");
+       var imageInput2 = $("#imageInput2");
+       var imageInput3 = $("#imageInput3");
+       var imageInput4 = $("#imageInput4");
+       var imageInput5 = $("#imageInput5");
+       var imageInput6 = $("#imageInput6"); 
+
+            const selectedImages = [imageInput, imageInput2, imageInput3,imageInput4,imageInput5,imageInput6]; // Add more image inputs if needed
+            const selectedImageCount = selectedImages.filter(input => input.files.length > 0).length;
+           alert("more than 3");
+              if (selectedImageCount < 3) {
+             // Display an error message or perform any other action
+            alert("less than 3");
+          //   document.getElementById("Vald1").innerHTML = "Please select at least three images.";
+             document.getElementById("Vald1").innerHTML = "Please select at least three images";
+             return false; // Prevent form submission
+             }
+             if(roomCount == 0)
+             {
+               valofcount.innerHTML = "Please enter at least 1"
+                 alert("zero");
+             }
+
+
+             var floor = $("#Floor").val();
+           var roomNumInput = $("#RoomNum");
+            var roomNum = roomNumInput.val();
+
+             if (floor && floor.length > 0 && roomNum && roomNum.length > 1) {
+               var updatedRoomNum = floor.charAt(0) + roomNum.substring(1);
+                 roomNumInput.val(updatedRoomNum);
+
+
+                   }
+    formData.append('spouseBedChecked', value);
+    console.log(formData);
+            $.ajax({
+                url: "/Room/AddRooms",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Handle the success response
+                    // You can update the UI or perform any other action here
+                    alert(value + "" +"spouseBedChecked");
+                },
+                error: function(xhr) {
+                     alert(value + " error" + "spouseBedChecked");
+                    // Handle the error response
+                }
+            });
+            });
+                
+    });
+</script>
+ <script>
+    const imageInput1 = document.getElementById('imageInput');
+    const imageThumbnail1 = document.getElementById('imageThumbnail');
+    
+    imageThumbnail1.addEventListener('click', function() {
+      imageInput1.click();
+    });
+    
+    imageInput1.addEventListener('change', function(event) {
+      const file1 = event.target.files[0];
+      
+      if (file1) {
+        const reader = new FileReader();
+        
+        reader.onload = function() {
+          imageThumbnail1.src = reader.result;
+        };
+        
+        reader.readAsDataURL(file1);
+      }
+    });
+  </script>
+   <script>
+    const imageInput2 = document.getElementById('imageInput2');
+    const imageThumbnail2 = document.getElementById('imageThumbnail2');
+    
+    imageThumbnail2.addEventListener('click', function() {
+      imageInput2.click();
+    });
+    
+    imageInput2.addEventListener('change', function(event) {
+      const file2 = event.target.files[0];
+      
+      if (file2) {
+        const reader2 = new FileReader();
+        
+        reader2.onload = function() {
+          imageThumbnail2.src = reader2.result;
+        };
+        
+        reader2.readAsDataURL(file2);
+      }
+    });
+  </script>
+  @*3*@
+     <script>
+    const imageInput3 = document.getElementById('imageInput3');
+    const imageThumbnail3 = document.getElementById('imageThumbnail3');
+    
+    imageThumbnail3.addEventListener('click', function() {
+      imageInput3.click();
+    });
+    
+    imageInput3.addEventListener('change', function(event) {
+      const file3= event.target.files[0];
+      
+      if (file3) {
+        const reader3 = new FileReader();
+        
+        reader3.onload = function() {
+          imageThumbnail3.src = reader3.result;
+        };
+        
+        reader3.readAsDataURL(file3);
+      }
+    });
+  </script>
+  @*4*@
+      <script>
+    const imageInput4 = document.getElementById('imageInput4');
+    const imageThumbnail4 = document.getElementById('imageThumbnail4');
+    
+    imageThumbnail4.addEventListener('click', function() {
+      imageInput4.click();
+    });
+    
+    imageInput4.addEventListener('change', function(event) {
+      const file4= event.target.files[0];
+      
+      if (file4) {
+        const reader4 = new FileReader();
+        
+        reader4.onload = function() {
+          imageThumbnail4.src = reader4.result;
+        };
+        
+        reader4.readAsDataURL(file4);
+      }
+    });
+  </script>
+  @*5*@
+      <script>
+    const imageInput5= document.getElementById('imageInput5');
+    const imageThumbnail5 = document.getElementById('imageThumbnail5');
+    
+    imageThumbnail5.addEventListener('click', function() {
+      imageInput5.click();
+    });
+    
+    imageInput5.addEventListener('change', function(event) {
+      const file5= event.target.files[0];
+      
+      if (file5) {
+        const reader5 = new FileReader();
+        
+        reader5.onload = function() {
+          imageThumbnail5.src = reader5.result;
+        };
+        
+        reader5.readAsDataURL(file5);
+      }
+    });
+  </script>
+    <script>
+    const imageInput6= document.getElementById('imageInput6');
+    const imageThumbnail6 = document.getElementById('imageThumbnail6');
+    
+    imageThumbnail6.addEventListener('click', function() {
+      imageInput6.click();
+    });
+    
+    imageInput6.addEventListener('change', function(event) {
+      const file6= event.target.files[0];
+      
+      if (file6) {
+        const reader6 = new FileReader();
+        
+        reader6.onload = function() {
+          imageThumbnail6.src = reader6.result;
+        };
+        
+        reader6.readAsDataURL(file6);
+      }
+    });
+  </script>
+  <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.3/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/assets/js/jquery-3.2.1.min.js"></script>
+
